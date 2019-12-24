@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/barissimsek/npp/scale"
+	"github.com/barissimsek/npp/pkg/scale"
 )
 
 // Usage: cmd -scale major -note C
