@@ -14,9 +14,9 @@ func main() {
 	var s = flag.String("scale", "major", "scale: major, minor")
 	flag.Parse()
 
-	major := scale.Get(*s, *note)
+	scale := scale.Get(*s, *note)
 
-	fmt.Println(major)
+	fmt.Println(scale)
 
 	os.Exit(0)
 }
