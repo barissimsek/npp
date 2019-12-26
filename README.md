@@ -11,7 +11,7 @@ N++ is a "music as a code" language which allows users to compose programmable a
 ### Usage
 
 ```
-npp --help
+$ npp --help
 Command line tool for N++ music library.
 
 Usage:
@@ -35,6 +35,7 @@ $ npp get scale --root C --type maj
 ```
 
 ### List
+```
 $ npp list chord
      A#maj: [A# D F]
      A#min: [A# C# F]
