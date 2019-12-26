@@ -1,14 +1,15 @@
 package scale
 
-var chromatic = []string{"A", "A#/Bb", "B", "C", "C#/Db", "D", "D#/Eb", "E", "F", "F#/Gb", "G", "G#/Ab"}
-var scalemap = map[string][]int{
-	"maj":  []int{0, 2, 2, 1, 2, 2, 2, 1}, // Major intervals starting from the root note
-	"minn": []int{0, 2, 1, 2, 2, 1, 2, 2}, // Natural minor intervals starting from the root note
-	"minh": []int{0, 2, 1, 2, 2, 1, 2, 2}, // Harmonic minor intervals starting from the root note
-	"minm": []int{0, 2, 1, 2, 2, 1, 2, 2}, // Melodic minor intervals starting from the root note
-}
+import (
+	"fmt"
+	"sort"
+
+	"github.com/barissimsek/npp/pkg/music"
+)
 
 func index(note string) int {
+	var chromatic = music.Chromatic()
+
 	for i, v := range chromatic {
 		if v == note {
 			return i
@@ -18,17 +19,15 @@ func index(note string) int {
 }
 
 // Get returns the scale for a given note
-func Get(s string, note string) []string {
-	var i = index(note)
+func Get(s string, root string) []string {
+	var i = index(root)
 	var formula = make([]int, 8)
 	var scale = []string{}
 
+	var chromatic = music.Chromatic()
+
 	// Choose interval formula
-	if _, ok := scalemap[s]; ok {
-		formula = scalemap[s]
-	} else {
-		return nil
-	}
+	formula = music.Scale(s)
 
 	// Generate scale from intervals
 	for j := 0; j < 7; j++ {
@@ -37,4 +36,24 @@ func Get(s string, note string) []string {
 	}
 
 	return scale
+}
+
+// List returns major and minor scales for all notes
+func List() map[string][]string {
+	var m = make(map[string][]string)
+	var r []string
+
+	for _, v := range music.Chromatic() {
+		r = append(r, v+"maj")
+		r = append(r, v+"min")
+		m[v+"maj"] = Get("maj", v)
+		m[v+"min"] = Get("minn", v)
+	}
+
+	sort.Strings(r)
+	for _, k := range r {
+		fmt.Printf("%10s: %s\n", k, m[k])
+	}
+
+	return m
 }
