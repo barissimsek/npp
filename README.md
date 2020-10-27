@@ -1,12 +1,6 @@
-# Note++
+## NPP
 
-## Note++
-Note++ is a music library to make music programmable. It comes with a command line tool.
-
-## N++
-N++ is a "music as a code" language which allows users to compose programmable and iterative music and collaborate with other "music developers".
-
-## CLI Tool
+`npp` is a tool that designed to help musicians.
 
 ### Usage
 
